@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 東北北海道 J 人 App 最終版</title>
+    <style>
+        :root { --primary: #ff6b6b; --glass: rgba(255, 255, 255, 0.92); --shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        body, html { margin: 0; padding: 0; font-family: -apple-system, "Microsoft JhengHei", sans-serif; background: #fdf2f2; scroll-behavior: smooth; }
+        
+        /* Dashboard */
+        #home { padding: 20px; animation: fadeIn 0.5s; }
+        .app-header { text-align: center; padding: 30px 0; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .day-box {
+            background: white; border-radius: 18px; padding: 18px; text-decoration: none; color: #333;
+            box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center;
+            text-align: center; border: 1px solid rgba(255,107,107,0.1); transition: 0.2s;
+        }
+        .day-box:active { transform: scale(0.92); }
+        .day-num { font-weight: bold; color: var(--primary); font-size: 1.3rem; }
+        .day-dest { font-size: 0.85rem; color: #444; margin-top: 5px; font-weight: 600; }
+
+        /* Detail Page */
+        .page { display: none; min-height: 100vh; padding: 20px; box-sizing: border-box; background-size: cover; background-position: center; background-attachment: fixed; }
+        .overlay { 
+            background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px; padding: 25px; margin-top: 80px; box-shadow: var(--shadow);
+            animation: slideUp 0.4s cubic-bezier(0, 0.5, 0.5, 1);
+        }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .back-btn { 
+            position: fixed; top: 20px; left: 20px; background: var(--primary); color: white; 
+            padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .title { border-left: 6px solid var(--primary); padding-left: 12px; font-weight: bold; font-size: 1.3rem; margin-bottom: 25px; color: #222; }
+        .item { display: flex; gap: 15px; margin-bottom: 18px; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+        .item:last-child { border-bottom: none; }
+        .time { color: var(--primary); font-weight: bold; min-width: 60px; font-size: 1rem; }
+        .desc-box { flex-grow: 1; }
+        .act-title { font-weight: bold; font-size: 1rem; color: #222; }
+        .meta { font-size: 0.85rem; color: #666; background: rgba(0,0,0,0.03); padding: 8px; border-radius: 8px; margin-top: 5px; }
+        .important { color: #d32f2f; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="home">
+    <div class="app-header">
+        <h1>🌸 日本賞櫻 J 人 App</h1>
+        <p>2026.03.30 - 04.12 完美手冊</p>
+    </div>
+    <div class="grid" id="mainGrid"></div>
+</div>
+
+<div id="detailPage" class="page">
+    <a href="javascript:void(0)" class="back-btn" onclick="showHome()">← 返回總覽</a>
+    <div id="detailContent"></div>
+</div>
+
+<script>
+    const tripData = [
+        { d: "3/30", title: "仙台首抵", img: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1000", items: [
+            { t: "14:35", a: "抵達仙台機場", m: "搭乘機場聯絡線往仙台站 (￥680)" },
+            { t: "16:00", a: "入住 KOKO HOTEL", m: "辦理進房並寄存行李" },
+            { t: "17:00", a: "鳥貴族 仙台站西口", m: "未預約，務必準時開門進場" }
+        ]},
+        { d: "3/31", title: "仙台購物", img: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=1000", items: [
+            { t: "11:00", a: "たんや善治郎", m: "厚切牛舌！建議 10:45 抵達排隊" },
+            { t: "下午", a: "商圈大購物", m: "S-PAL、一番町、AER 展望台" }
+        ]},
+        { d: "4/01", title: "松島絕景", img: "https://images.unsplash.com/photo-1621501170366-0797316718d7?w=1000", items: [
+            { t: "09:25", a: "仙台發車", m: "JR 仙石線往松島海岸站" },
+            { t: "10:15", a: "西行戻之松公園", m: "打車上山看全景，再步行下山" },
+            { t: "13:00", a: "松島觀光船", m: "需提前預約 (￥1,500)" }
+        ]},
+        { d: "4/02", title: "跨海新幹線", img: "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1000", items: [
+            { t: "上午", a: "一目千本櫻", m: "白石川堤大河原站，散步至船岡" },
+            { t: "14:53", a: "隼號新幹線", m: "仙台 ➔ 函館 (持 PASS 免費)" },
+            { t: "18:30", a: "入住 JR Inn", m: "車站直結，下車即抵達" }
+        ]},
+        { d: "4/03", title: "函館經典", img: "https://images.unsplash.com/photo-1590254070043-410d48995390?w=1000", items: [
+            { t: "08:00", a: "函館朝市", m: "釣烏賊體驗、海鮮丼早餐" },
+            { t: "12:30", a: "小丑漢堡", m: "五稜郭店，必吃中華雞塊堡" },
+            { t: "晚上", a: "函館山夜景", m: "纜車往返 ￥1,800，日落前上山" }
+        ]},
+        { d: "4/04", title: "大沼 ➔ 札幌", img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1000", items: [
+            { t: "10:05", a: "特急北斗發", m: "函館 ➔ 大沼公園" },
+            { t: "13:59", a: "特急北斗發", m: "大沼 ➔ 札幌 (17:30 抵達)" },
+            { t: "18:00", a: "入住法華飯店", m: "札幌站周邊散策" }
+        ]},
+        { d: "4/05", title: "浪漫小樽", img: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1000", items: [
+            { t: "10:00", a: "快速 Airport", m: "札幌 ➔ 南小樽站下車" },
+            { t: "下午", a: "小樽散策", m: "堺町通、音樂盒堂、北一硝子" },
+            { t: "15:00", a: "運河遊覽船", m: "建議預約黃昏場次" }
+        ]},
+        { d: "4/06", title: "洞爺溫泉", img: "https://images.unsplash.com/photo-1590559899731-a382839e5549?w=1000", items: [
+            { t: "10:00", a: "法華退房", m: "行李先移至東急Stay寄存" },
+            { t: "12:45", a: "接駁車集合", m: "大通西 1 丁目 Kanamoto Hall 前" },
+            { t: "15:30", a: "入住湖之栖", m: "房內露天風呂享受湖景" }
+        ]},
+        { d: "4/07", title: "白老和牛", img: "https://images.unsplash.com/photo-1544380904-c686aad2fc40?w=1000", items: [
+            { t: "11:58", a: "特急北斗發", m: "洞爺 ➔ 白老" },
+            { t: "13:10", a: "白老牛午餐", m: "頂級和牛，行李放車站寄物櫃" },
+            { t: "18:23", a: "返抵札幌", m: "入住東急Stay，使用房內洗衣機" }
+        ]},
+        { d: "4/08", title: "神宮夜景", img: "https://images.unsplash.com/photo-1610375229632-c7158c35a537?w=1000", items: [
+            { t: "09:30", a: "白色戀人", m: "夢幻巧克力工廠" },
+            { t: "13:30", a: "北海道神宮", m: "必吃判官樣現烤紅豆餅" },
+            { t: "17:30", a: "藻岩山夜景", m: "日本新三大夜景 (纜車 ￥2,100)" }
+        ]},
+        { d: "4/09", title: "絕景一日遊", img: "https://images.unsplash.com/photo-1578272189444-247069b2d6bb?w=1000", items: [
+            { t: "07:40", a: "東急REI集合", m: "請準時抵達薄野區集合點" },
+            { t: "全天", a: "道央巴士遊", m: "地獄谷、地球岬、洞爺湖、支笏湖" }
+        ]},
+        { d: "4/10", title: "校園購物", img: "https://images.unsplash.com/photo-1558948211-193498964703?w=1000", items: [
+            { t: "08:30", a: "場外市場", m: "海鮮早餐 (建議計程車前往)" },
+            { t: "11:00", a: "北海道大學", m: "漫步銀杏大道、北大博物館" },
+            { t: "下午", a: "車站大購物", m: "大丸、Stellar Place、Bic Camera" }
+        ]},
+        { d: "4/11", title: "最後掃貨", img: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=1000", items: [
+            { t: "上午", a: "二條市場", m: "海鮮乾貨、最後伴手禮" },
+            { t: "下午", a: "札幌工廠", m: "Mont-bell 等戶外品牌採購" },
+            { t: "晚上", a: "狸小路", m: "藥妝店最後掃貨、打包行李" }
+        ]},
+        { d: "4/12", title: "平安歸途", img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1000", items: [
+            { t: "08:30", a: "搭機場快線", m: "札幌 ➔ 新千歲 (￥1,150)" },
+            { t: "11:15", a: "IT235 班機", m: "起飛返台，結束 14 天旅程" }
+        ]}
+    ];
+
+    const grid = document.getElementById('mainGrid');
+    tripData.forEach((day, index) => {
+        const box = document.createElement('div');
+        box.className = 'day-box';
+        box.onclick = () => showDetail(index);
+        box.innerHTML = `<div class="day-num">${day.d}</div><div class="day-dest">${day.title}</div>`;
+        grid.appendChild(box);
+    });
+
+    function showDetail(index) {
+        const data = tripData[index];
+        const page = document.getElementById('detailPage');
+        const content = document.getElementById('detailContent');
+        page.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${data.img}')`;
+        
+        let htmlItems = data.items.map(i => `
+            <div class="item">
+                <div class="time">${i.t}</div>
+                <div class="desc-box">
+                    <div class="act-title">${i.a}</div>
+                    <div class="meta">${i.m}</div>
+                </div>
+            </div>`).join('');
+
+        content.innerHTML = `<div class="overlay"><div class="title">${data.d} ${data.title}</div>${htmlItems}</div>`;
+        document.getElementById('home').style.display = 'none';
+        page.style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function showHome() {
+        document.getElementById('home').style.display = 'block';
+        document.getElementById('detailPage').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
