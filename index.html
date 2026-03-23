@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 東北北海道行程 - 完整導航版</title>
+    <title>2026 東北北海道行程 - 究極導航版</title>
     <style>
         :root {
             --bg-color: #fdf2f2;
@@ -13,7 +13,7 @@
             --color-sapporo: #689f38;
             --color-toya: #00796b;
             --color-final: #455a64;
-			--color-notes: #5d4037;
+            --color-notes: #5d4037;
         }
         body { font-family: "Microsoft JhengHei", sans-serif; background: var(--bg-color); margin: 0; padding: 40px 20px; }
         h1 { text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 40px; letter-spacing: 8px; color: #333; }
@@ -26,12 +26,11 @@
         .main-route { font-size: 15px; font-weight: bold; margin-bottom: 6px; line-height: 1.4; }
         .hotel-link { font-size: 12px; color: rgba(255,255,255,0.95); margin-bottom: 6px; display: block; text-decoration: underline; font-weight: bold; }
         .sub-details { font-size: 13px; opacity: 0.95; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 6px; }
-
-		/* 備忘錄樣式 */
-        .notes-section { max-width: 550px; margin: 40px auto 0; padding: 20px; background: #fff; border-left: 5px solid var(--color-notes); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .notes-title { font-size: 18px; font-weight: bold; color: var(--color-notes); margin-bottom: 12px; display: flex; align-items: center; }
-        .notes-list { margin: 0; padding-left: 20px; color: #5a4a42; font-size: 14px; line-height: 1.8; }
         
+        .notes-section { max-width: 550px; margin: 40px auto 0; padding: 20px; background: #fff; border-left: 5px solid var(--color-notes); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .notes-title { font-size: 18px; font-weight: bold; color: var(--color-notes); margin-bottom: 12px; }
+        .notes-list { margin: 0; padding-left: 20px; color: #5a4a42; font-size: 14px; line-height: 1.8; }
+
         .type-sendai .date-circle { border-color: var(--color-sendai); color: var(--color-sendai); }
         .type-sendai .content-box { background: var(--color-sendai); }
         .type-hakodate .date-circle { border-color: var(--color-hakodate); color: var(--color-hakodate); }
@@ -55,7 +54,7 @@
         <div class="content-box">
             <div class="main-route">歡迎來到仙台!!!</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=KOKO+HOTEL+Sendai+Station+West" class="hotel-link" target="_blank">🏨 KOKO HOTEL Sendai Station West</a>
-            <div class="sub-details">BR118(10:15) ➔ 14:35抵達 ➔ 15:10機場快線 ➔ 飯店 Check-in ➔ 17:00 晚餐：鳥貴族</div>
+            <div class="sub-details">BR118(10:15) ➔ 14:35抵達 ➔ 15:10機場快線 ➔ 飯店 Check-in ➔ 17:00 鳥貴族</div>
         </div>
     </div>
 
@@ -71,7 +70,7 @@
     <div class="day-container type-sendai">
         <div class="date-circle">04/01<span>(三)</span></div>
         <div class="content-box">
-            <div class="main-route">松島絕景一日遊</div>
+            <div class="main-route">松島絕景一日遊 — 瑞嚴寺</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=KOKO+HOTEL+Sendai+Station+West" class="hotel-link" target="_blank">🏨 KOKO HOTEL Sendai Station West</a>
             <div class="sub-details">西行戻公園(計程車) ➔ 觀光船 ➔ 瑞嚴寺 ➔ 烤牡蠣</div>
         </div>
@@ -80,7 +79,7 @@
     <div class="day-container type-hakodate">
         <div class="date-circle">04/02<span>(四)</span></div>
         <div class="content-box">
-            <div class="main-route">賞櫻&前往函館!!! (啟用JR PASS)</div>
+            <div class="main-route">賞櫻&前往函館!!! (啟用PASS)</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=JR+Inn+Hakodate" class="hotel-link" target="_blank">🏨 JR Inn Hakodate</a>
             <div class="sub-details">白石川堤賞櫻 ➔ 隼25號仙台(14:53) ➔ 函館(17:47)</div>
         </div>
@@ -104,12 +103,15 @@
         </div>
     </div>
 
-	<div class="day-container type-sapporo">
+    <div class="day-container type-sapporo">
         <div class="date-circle">04/05<span>(日)</span></div>
         <div class="content-box">
-            <div class="main-route">小樽一日遊</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Hokke+Club+Sapporo" class="hotel-link" target="_blank">🏨 Hotel Hokke Club Sapporo</a>
-            <div class="sub-details">Airport 35札幌(10:00)➔南小樽(10:37) ➔ 堺町通、音樂盒堂 ➔ 預約小樽運河黃昏場</div>
+            <div class="main-route">旭山動物園/美瑛一日遊</div>
+            <a href="http://googleusercontent.com/maps.google.com/search?q=Hotel+Hokke+Club+Sapporo" class="hotel-link" target="_blank">🏨 Hotel Hokke Club Sapporo</a>
+            <div class="sub-details">
+                <a href="http://googleusercontent.com/maps.google.com/search?q=Sapporo+Station+North+Exit" style="color:white;font-weight:bold;text-decoration:underline;">07:40 札幌車站北口集合</a><br>
+                10:30 旭山動物園 ➔ 13:20 青池 ➔ 14:00 白須瀑布 ➔ 15:50 森林精靈露台 ➔ 18:30 返抵札幌
+            </div>
         </div>
     </div>
 
@@ -118,7 +120,7 @@
         <div class="content-box">
             <div class="main-route">前往洞爺湖!!!</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=The+Lake+Suite+Ko+no+Sumika" class="hotel-link" target="_blank">🏨 The Lake Suite Ko no Sumika (湖之栖)</a>
-            <div class="sub-details">10:00 退房 ➔ <a href="http://googleusercontent.com/maps.google.com/search?q=Kanamoto+Hall" style="color: white; font-weight: bold; text-decoration: underline;">12:45 大通集合(Kanamoto Hall前)</a> ➔ 接駁巴士 ➔ 湖之栖泡湯</div>
+            <div class="sub-details">10:00 退房 ➔ <a href="http://googleusercontent.com/maps.google.com/search?q=Kanamoto+Hall" style="color:white;font-weight:bold;text-decoration:underline;">12:45 大通集合(Kanamoto Hall前)</a> ➔ 接駁巴士 ➔ 湖之栖泡湯</div>
         </div>
     </div>
 
@@ -134,9 +136,9 @@
     <div class="day-container type-sapporo">
         <div class="date-circle">04/08<span>(三)</span></div>
         <div class="content-box">
-            <div class="main-route">札幌市區夜景一日遊</div>
+            <div class="main-route">小樽運河浪漫散策一日遊</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=Tokyu+Stay+Sapporo+Odori" class="hotel-link" target="_blank">🏨 Tokyu Stay Sapporo Odori</a>
-            <div class="sub-details">白色戀人公園 ➔ 北海道神宮 ➔ 藻岩山夜景</div>
+            <div class="sub-details">搭乘JR至南小樽 ➔ 音樂盒堂、堺町通 ➔ 午餐:海鮮丼/政壽司 ➔ 小樽運河黃昏 ➔ 札幌</div>
         </div>
     </div>
 
@@ -145,17 +147,16 @@
         <div class="content-box">
             <div class="main-route">道央絕景一日遊巴士</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=Tokyu+Stay+Sapporo+Odori" class="hotel-link" target="_blank">🏨 Tokyu Stay Sapporo Odori</a>
-            <a href="http://googleusercontent.com/maps.google.com/search?q=Sapporo+Tokyu+REI+Hotel" class="hotel-link" style="color: rgba(255,255,255,0.85); text-decoration: underline;" target="_blank">📍 集合：東急REI飯店</a>
-            <div class="sub-details">07:40 集合 ➔ 地獄谷 ➔ 地球岬 ➔ 昭和新山 ➔ 支笏湖</div>
+            <div class="sub-details"><a href="http://googleusercontent.com/maps.google.com/search?q=Sapporo+Tokyu+REI+Hotel" style="color:white;font-weight:bold;text-decoration:underline;">07:40 集合(東急REI)</a> ➔ 地獄谷 ➔ 地球岬 ➔ 昭和新山 ➔ 支笏湖</div>
         </div>
     </div>
 
     <div class="day-container type-sapporo">
         <div class="date-circle">04/10<span>(五)</span></div>
         <div class="content-box">
-            <div class="main-route">車站購物</div>
+            <div class="main-route">札幌市區景點一日遊</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=Tokyu+Stay+Sapporo+Odori" class="hotel-link" target="_blank">🏨 Tokyu Stay Sapporo Odori</a>
-            <div class="sub-details">場外市場 ➔ 北海道大學 ➔ 札幌車站大丸、Bic Camera</div>
+            <div class="sub-details">白色戀人公園 ➔ 北海道神宮 ➔ 藻岩山夜景 (日本新三大夜景)</div>
         </div>
     </div>
 
@@ -164,16 +165,16 @@
         <div class="content-box">
             <div class="main-route">最後大採買</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=Tokyu+Stay+Sapporo+Odori" class="hotel-link" target="_blank">🏨 Tokyu Stay Sapporo Odori</a>
-            <div class="sub-details">二條市場 ➔ 札幌工廠 ➔ 狸小路補貨 ➔ 行李大打包</div>
+            <div class="sub-details">二條市場 ➔ 場外市場 ➔ 札幌車站購物 (Bic Camera) ➔ 行李大打包</div>
         </div>
     </div>
 
     <div class="day-container type-final">
         <div class="date-circle">04/12<span>(日)</span></div>
         <div class="content-box">
-            <div class="main-route">抵達新千歲機場 ➔ 國內線伴手禮掃貨</div>
+            <div class="main-route">抵達新千歲機場 ➔ 歸途</div>
             <a href="http://googleusercontent.com/maps.google.com/search?q=New+Chitose+Airport" class="hotel-link" target="_blank">🛫 New Chitose Airport (CTS)</a>
-            <div class="sub-details">IT235(12:05) ➔ 平安歸國(15:20) ➔ 結束 14 天旅程</div>
+            <div class="sub-details">IT235(12:05) ➔ 平安歸國(15:20) ➔ 結束旅程</div>
         </div>
     </div>
 
@@ -182,11 +183,10 @@
 <div class="notes-section">
     <div class="notes-title">📝 旅途注意事項</div>
     <ul class="notes-list">
-        <li><b>JR PASS 領取：</b> 3/30 抵達仙台後先至綠色窗口領取JR PASS。</li>
-        <li><b>上網卡/WiFi：</b> 確認漫遊已開啟或裝好 eSIM。</li>
-        <li><b>天氣提醒：</b> 4 月初東北與北海道仍有溫差，建議洋蔥式穿法。</li>
-        <li><b>退稅提醒：</b> Bic Camera 或 Outlet 購物記得帶實體護照。</li>
-        <li></li>
+        <li><b>JR PASS：</b> 3/30 仙台領取，4/2 正式啟用。</li>
+        <li><b>衣物：</b> 4月北海道仍冷，洋蔥式穿法，手套圍巾備用。</li>
+        <li><b>網路：</b> 確認 eSIM 或 WiFi 機已就緒。</li>
+        <li><b>退稅：</b> 購物隨身攜帶實體護照。</li>
     </ul>
 </div>
 
